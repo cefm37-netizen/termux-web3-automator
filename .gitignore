@@ -1,0 +1,10 @@
+# Gizli Ayarlar ve Anahtarlar
+config.json
+keys.json
+keys.json.enc
+.env
+
+# Bağımlılıklar ve Loglar
+node_modules/
+*.log
+.pm2/

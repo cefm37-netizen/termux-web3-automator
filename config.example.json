@@ -1,0 +1,21 @@
+{
+  "NETWORK_SETTINGS": {
+    "BASE_SEPOLIA_RPC_URLS": [
+      "https://sepolia.base.org",
+      "https://your-fallback-rpc.com"
+    ],
+    "DEFAULT_GAS_LIMIT_BUFFER": 1.2
+  },
+  "AUTOMATION_SETTINGS": {
+    "MIN_SLEEP_MINUTES": 15,
+    "MAX_SLEEP_MINUTES": 45,
+    "MAX_FAILURES_BEFORE_STOP": 3
+  },
+  "TASK_WEIGHTS": {
+    "CONTRACT_DEPLOY": 0.25,
+    "WETH_WRAP": 0.20,
+    "WETH_UNWRAP": 0.15,
+    "TOKEN_SWAP": 0.28,
+    "RANDOM_TRANSFER": 0.12
+  }
+}
