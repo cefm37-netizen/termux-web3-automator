@@ -8,3 +8,4 @@ keys.json.enc
 node_modules/
 *.log
 .pm2/
+*.py
