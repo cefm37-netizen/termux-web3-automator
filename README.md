@@ -1,48 +1,25 @@
-# 📱 Termux-Web3-Automator
-### Mobile Edge Stress Testing & Anti-Sybil Behavioral Simulation Framework
+# 📱 Termux Mobile Node Operator
+### Autonomous Mobile Endpoint for DePIN & L2 Networks
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Platform](https://img.shields.io/badge/platform-Android%20%2B%20Termux-brightgreen)
 ![Node](https://img.shields.io/badge/node-%3E%3D18.x-success)
 ![Base](https://img.shields.io/badge/network-Base%20Sepolia-blue)
-![ESP](https://img.shields.io/badge/ESP-referred-green)
 
 > **A public good for developers in emerging economies.**
-> No desktop? No server? No problem. Just an Android phone and an internet connection.
+> No desktop? No server? No problem. Just an Android phone.
 
----
+## 🎯 What This Is
+A lightweight, mobile-first framework that operates **24 autonomous wallets** on a single Android phone via Termux. Built for **continuous, low-frequency on-chain activity** from real mobile edge conditions — dynamic CGNAT IPs, thermal throttling (42°C), and zero cloud cost.
 
-## 🔥 Currently Discussing Integration With
-- **[ethPandaOps / Spamoor](https://github.com/ethpandaops/spamoor/issues/257)** – Mobile traffic simulation for Ethereum's network testing suite
-- **Ethereum Foundation ESP** – Referred by the Ecosystem Support Program
+## 🔥 Currently Seeking
+- **DePIN Networks** needing mobile node operators for testnet presence.
+- **L2 Testnets** looking for consistent, low-frequency mobile traffic.
 
----
+## 🏗️ Core Features
+- **24/7 Autonomous Operation:** PM2-managed 13 bot cluster with crash recovery and thermal protection.
+- **Mobile Edge Reality:** CGNAT IP rotation, 42°C thermal guard, operates within ~300MB RAM.
+- **Verifiable On-Chain Activity:** 4,500+ transactions on Base Sepolia with 100% success rate.
 
-## 🎯 The Problem
-
-Across developing nations, talented developers are locked out of the Web3 ecosystem due to:
-
-- **Hardware barriers:** High cost of laptops, desktops, and cloud servers.
-- **Infrastructure gaps:** Unreliable electricity and expensive broadband.
-- **Educational deserts:** Lack of accessible, hands-on Web3 learning tools.
-
----
-
-## 💡 Our Solution
-
-**Termux-Web3-Automator** is an open-source, mobile-first framework that transforms **any Android phone** into a fully autonomous Web3 development and automation station.
-
-Built on **Node.js + ethers.js** and orchestrated by **PM2**, it enables:
-
-- 🔧 **Smart Contract Deployment** – Deploy and interact with contracts directly from a mobile terminal.
-- 🔄 **DeFi Interactions** – Automated swaps, wrapping/unwrapping, and liquidity provision.
-- 🌉 **Layer-2 Bridging** – Seamless cross-chain activity on Base, Optimism, and more.
-- 🤖 **On-Chain Agents** – Lightweight bots that operate 24/7 with minimal resource footprint.
-- 🧪 **Edge Stress Testing** – Real-world mobile network conditions for L2 sequencer resilience testing.
-
-All of this runs **entirely on a mobile device**, consuming **less than 300 MB of RAM** and operating at **zero cost**.
-
----
-
-## 🏗️ System Architecture
-
+## 📜 License
+MIT © 2026 [cefm37-netizen](https://github.com/cefm37-netizen)
