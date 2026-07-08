@@ -1,62 +1,56 @@
-const ethers = require('ethers');
 const fs = require('fs');
+const { ethers } = require('ethers');
 
-const RPC = 'https://ethereum-sepolia.publicnode.com';
-const provider = new ethers.JsonRpcProvider(RPC);
+const wallets = JSON.parse(fs.readFileSync('demo_wallets.json', 'utf8'));
+const RPC_URL = "https://ethereum-sepolia-rpc.publicnode.com";
+const provider = ethers.getDefaultProvider(RPC_URL);
 
-const demoWallets = JSON.parse(fs.readFileSync('demo_wallets.json', 'utf8'));
-const LOG_FILE = 'demo_live_log.json';
+function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
-function logYaz(mesaj) {
-  const kayit = { zaman: new Date().toISOString(), mesaj };
-  console.log(`[${kayit.zaman}] ${mesaj}`);
-  try {
-    const loglar = fs.existsSync(LOG_FILE) ? JSON.parse(fs.readFileSync(LOG_FILE)) : [];
-    loglar.push(kayit);
-    fs.writeFileSync(LOG_FILE, JSON.stringify(loglar, null, 2));
-  } catch(e) {}
-}
-
-function poissonBekleme(ortalamaSn) {
-  return new Promise(resolve => {
-    const lambda = 1 / ortalamaSn;
-    const sure = Math.min(-Math.log(Math.random()) / lambda * 1000, ortalamaSn * 2000);
-    setTimeout(resolve, sure);
-  });
-}
-
-async function demoBaslat() {
-  logYaz('🚀 DEMO BAŞLADI - 5 cüzdan, Sepolia Testnet');
-  
-  const wallets = demoWallets.map(w => new ethers.Wallet(w.privateKey, provider));
-  const hedefler = demoWallets.map(w => w.address);
-  
-  for (let tur = 0; tur < 10; tur++) {
-    for (let i = 0; i < wallets.length; i++) {
-      const sender = wallets[i];
-      let aliciIndex;
-      do { aliciIndex = Math.floor(Math.random() * wallets.length); } while (aliciIndex === i);
-      const alici = hedefler[aliciIndex];
-      
-      const miktarETH = (Math.random() * 0.0004 + 0.0001).toFixed(6);
-      const miktarWei = ethers.parseEther(miktarETH);
-      
-      try {
-        const tx = await sender.sendTransaction({
-          to: alici,
-          value: miktarWei
-        });
-        logYaz(`✅ Cüzdan${demoWallets[i].no} -> Cüzdan${demoWallets[aliciIndex].no}: ${miktarETH} ETH | Hash: ${tx.hash}`);
-        await tx.wait();
-      } catch(e) {
-        logYaz(`❌ Cüzdan${demoWallets[i].no} hatası: ${e.message.substring(0, 80)}`);
-      }
-      
-      await poissonBekleme(60);
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
-  }
-  
-  logYaz('✅ DEMO TAMAMLANDI');
+    return array;
 }
 
-demoBaslat().catch(e => logYaz('💥 KRİTİK HATA: ' + e.message));
+async function startAutonomousEdgeNode() {
+    console.log("🚀 MOBİL NODE BAŞLADI - Otonom Rastgele Dağılım Modu");
+    
+    while (true) {
+        try {
+            let activeQueue = shuffle([...wallets]);
+            
+            for (let i = 0; i < activeQueue.length; i++) {
+                const sourceWallet = new ethers.Wallet(activeQueue[i].privateKey, provider);
+                const targetWallets = wallets.filter(w => w.address !== sourceWallet.address);
+                const randomTarget = targetWallets[Math.floor(Math.random() * targetWallets.length)];
+                
+                const payloadData = ethers.hexlify(ethers.toUtf8Bytes("Mobile Edge State Simulation V1"));
+                console.log(`📡 [Edge Log] ${sourceWallet.address.slice(0,6)}... -> DATA PAYLOAD -> ${randomTarget.address.slice(0,6)}...`);
+                
+                try {
+                    const tx = await sourceWallet.sendTransaction({
+                        to: randomTarget.address,
+                        value: ethers.parseEther("0"),
+                        data: payloadData,
+                        gasLimit: 50000
+                    });
+                    console.log(`✅ Payload Başarılı! Hash: ${tx.hash.slice(0,10)}...`);
+                } catch (txError) {
+                    console.error(`⚠️ Payload hatası: ${txError.message.substring(0,50)}...`);
+                }
+                
+                const randomWait = Math.floor(Math.random() * (180000 - 45000 + 1)) + 45000;
+                console.log(`💤 ${Math.round(randomWait / 1000)} saniye bekleniyor...`);
+                await delay(randomWait);
+            }
+        } catch (error) {
+            console.error("⚠️ Döngü hatası:", error.message);
+            await delay(30000);
+        }
+    }
+}
+
+startAutonomousEdgeNode();
