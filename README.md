@@ -33,3 +33,15 @@ MIT © 2026 [cefm37-netizen](https://github.com/cefm37-netizen)
 
 ---
 *"A good engineer documents their failures as thoroughly as their successes."*
+
+---
+
+## 📦 Project Status: Archived (July 2026)
+
+This project is no longer actively developed. It served its purpose:
+- Demonstrated mobile process orchestration under hardware constraints
+- Survived a public code review by an Ethereum core developer
+- Taught crisis management, honest documentation, and technical pivoting
+
+**What's next?** The skills learned here — Linux, PM2, log management, network manipulation, crisis response — are now being applied to [Rust / Docker / Cloud infrastructure / your next adventure].
+
